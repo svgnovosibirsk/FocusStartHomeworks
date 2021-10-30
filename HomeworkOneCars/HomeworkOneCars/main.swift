@@ -9,28 +9,28 @@ import Foundation
 
 var allCarsArray = [Car]()
 
-var isContinue = "y"
+var isContinue = true
 
-while("y" == isContinue) {
+while(isContinue) {
     printMenu()
     
     if let mItem = readLine()?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
         checkMenuItemInput(menuItem: mItem)
     }
-    
-    print("Continue? y/n")
-    isContinue = readLine()?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) ?? "n"
 }
 
 private func printMenu() {
     print("Enter 1 to add new car")
     print("Enter 2 to print list of cars")
     print("Enter 3 to print list of cars sorted by body type")
+    print("Enter 0 to Quit")
 }
 
 private func checkMenuItemInput(menuItem: String) {
     if let mItem = Int(menuItem) {
         switch mItem {
+        case 0:
+            isContinue = false
         case 1:
             addNewAuto()
         case 2:
@@ -53,38 +53,23 @@ private func addNewAuto() {
     var yearOfIssue: Int?
     var carNumber: String?
 
-    print("Enter manufacturer:")
-    if let enteredManufacturer = readLine(), enteredManufacturer.count > 0 {
-        manufacturer = enteredManufacturer
-    } else {
-        manufacturer = "unknown"
-    }
-       
-    print("Enter model:")
-    if let enteredModel = readLine(), enteredModel.count > 0 {
-        model = enteredModel
-    } else {
-        model = "unknown"
-    }
+    manufacturer = getUserInputForCarWith(message: "Enter manufacturer:")
+    
+    model = getUserInputForCarWith(message: "Enter model:")
 
-    print("Enter body: sedan, liftback, hatchback or cabriolet")
-    if let enteredBody = readLine(), enteredBody.count > 0 {
-        body = Body(rawValue: enteredBody) ?? .unknown
-        } else {
+    let potentialCarBody = getUserInputForCarWith(message: "Enter body: sedan, liftback, hatchback or cabriolet")
+    if potentialCarBody != "unknown" {
+        body = Body(rawValue: potentialCarBody) ?? .unknown
+    } else {
         body = .unknown
         handleMistakes()
     }
+
+    yearOfIssue = Int(getUserInputForCarWith(message: "Enter year of issue:"))
     
-    print("Enter year of issue:")
-    if let enteredYear = Int(readLine() ?? "") {
-        yearOfIssue = enteredYear
-    } else {
-        yearOfIssue = nil
-    }
-    
-    print("Enter car number:")
-    if let enteredNumber = readLine() {
-        carNumber = enteredNumber
+    let potentialCarNumber = getUserInputForCarWith(message: "Enter car number:")
+    if potentialCarNumber != "unknown" {
+        carNumber = potentialCarNumber
     } else {
         carNumber = nil
     }
@@ -96,6 +81,15 @@ private func addNewAuto() {
                      carNumber: carNumber)
     
     allCarsArray.append(newCar)
+}
+
+private func getUserInputForCarWith(message: String) -> String {
+    print(message)
+    var property = "unknown"
+    if let enteredProperty = readLine(), enteredProperty.count > 0 {
+        property = enteredProperty
+    }
+    return property
 }
 
 private func printListOfAuto(carArray: [Car]) {
