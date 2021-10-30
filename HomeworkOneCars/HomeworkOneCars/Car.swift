@@ -25,6 +25,16 @@ struct Car {
     let carNumber: String?
     
     func printCar() {
-        print("Manufacturer: \(self.manufacturer.uppercased())\nModel: \(self.model.uppercased())\nBody: \(self.body.rawValue.uppercased())\n" + (self.yearOfIssue == nil ? "yearOfIssue: -\n" : "yearOfIssue: \(String(describing: self.yearOfIssue!))\n") + (self.carNumber?.count ?? 0 < 3 ? "" : "Car Number: " + String(describing: self.carNumber!)))
+        
+        let carDescription =
+            """
+            Manufacturer: \(self.manufacturer)
+            Model: \(self.model)
+            Body: \(self.body.rawValue)
+            Year of issue: \(yearOfIssue?.description ?? "-")
+            \(carNumber?.count ?? 0 > 1 ? "Car number: \(String(describing: carNumber))" : "")
+        """
+        
+        print(carDescription)
     }
 }

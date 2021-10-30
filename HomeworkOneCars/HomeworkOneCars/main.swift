@@ -7,16 +7,17 @@
 
 import Foundation
 
-var menuItem: String?
-
 var allCarsArray = [Car]()
 
 var isContinue = "y"
 
 while("y" == isContinue) {
     printMenu()
-    menuItem = readLine()?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    checkMenuItemInput()
+    
+    if let mItem = readLine()?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) {
+        checkMenuItemInput(menuItem: mItem)
+    }
+    
     print("Continue? y/n")
     isContinue = readLine()?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) ?? "n"
 }
@@ -27,15 +28,15 @@ private func printMenu() {
     print("Enter 3 to print list of cars sorted by body type")
 }
 
-private func checkMenuItemInput() {
-    if let mItem = Int(menuItem ?? "0") {
+private func checkMenuItemInput(menuItem: String) {
+    if let mItem = Int(menuItem) {
         switch mItem {
         case 1:
             addNewAuto()
         case 2:
             printListOfAuto(carArray: allCarsArray)
         case 3:
-            printSortedListOfAuto()
+            printFilteredListOfAuto()
         default:
             handleMistakes()
         }
@@ -51,39 +52,25 @@ private func addNewAuto() {
     var body: Body
     var yearOfIssue: Int?
     var carNumber: String?
-    
+
     print("Enter manufacturer:")
-    if let enteredManufacturer = readLine() {
-        if enteredManufacturer.count > 0 {
-            manufacturer = enteredManufacturer
-        } else {
-            manufacturer = "Unknown"
-        }
+    if let enteredManufacturer = readLine(), enteredManufacturer.count > 0 {
+        manufacturer = enteredManufacturer
     } else {
-        manufacturer = "Unknown"
+        manufacturer = "unknown"
     }
-    
-    
+       
     print("Enter model:")
-    if let enteredModel = readLine() {
-        if enteredModel.count > 0 {
-            model = enteredModel
-        } else {
-            model = "Unknown"
-        }
+    if let enteredModel = readLine(), enteredModel.count > 0 {
+        model = enteredModel
     } else {
-        model = "Unknown"
+        model = "unknown"
     }
-    
+
     print("Enter body: sedan, liftback, hatchback or cabriolet")
-    if let enteredbody = readLine() {
-        switch enteredbody {
-        case "sedan", "liftback", "hatchback", "cabriolet":
-            body = Body(rawValue: enteredbody)!
-        default:
-            body = .unknown
-        }
-    } else {
+    if let enteredBody = readLine(), enteredBody.count > 0 {
+        body = Body(rawValue: enteredBody) ?? .unknown
+        } else {
         body = .unknown
         handleMistakes()
     }
@@ -102,8 +89,11 @@ private func addNewAuto() {
         carNumber = nil
     }
     
-    let newCar = Car(manufacturer: manufacturer, model: model,body: body,
-                     yearOfIssue: yearOfIssue, carNumber: carNumber)
+    let newCar = Car(manufacturer: manufacturer,
+                     model: model,
+                     body: body,
+                     yearOfIssue: yearOfIssue,
+                     carNumber: carNumber)
     
     allCarsArray.append(newCar)
 }
@@ -119,15 +109,13 @@ private func printListOfAuto(carArray: [Car]) {
     }
 }
 
-private func printSortedListOfAuto() {
+private func printFilteredListOfAuto() {
     var sortedCars = [Car]()
     
     print("Enter body: sedan, liftback, hatchback or cabriolet")
     if let enteredBody = readLine() {
-        for car in allCarsArray {
-            if car.body.rawValue == enteredBody {
-                sortedCars.append(car)
-            }
+        sortedCars = allCarsArray.filter {
+            $0.body.rawValue == enteredBody
         }
     }
     
