@@ -49,22 +49,28 @@ private func addNewAuto() {
 
     var manufacturer: String
     var model: String
-    var body: Body
+    var body: Body = .unknown
     var yearOfIssue: Int?
     var carNumber: String?
 
     manufacturer = getUserInputForCarWith(message: "Enter manufacturer:")
     
     model = getUserInputForCarWith(message: "Enter model:")
-
-    let potentialCarBody = getUserInputForCarWith(message: "Enter body: sedan, liftback, hatchback or cabriolet")
-    if potentialCarBody != "unknown" {
-        body = Body(rawValue: potentialCarBody) ?? .unknown
-    } else {
-        body = .unknown
-        handleMistakes()
+    
+    var gotBodyType = false
+    
+    while gotBodyType == false {
+        let potentialCarBody = getUserInputForCarWith(message: "Enter body: sedan, liftback, hatchback or cabriolet")
+        if potentialCarBody != "unknown" {
+            body = Body(rawValue: potentialCarBody) ?? .unknown
+            if body.rawValue != "unknown" {
+                gotBodyType = true
+            }
+        } else {
+            handleMistakes()
+        }
     }
-
+   
     yearOfIssue = Int(getUserInputForCarWith(message: "Enter year of issue:"))
     
     let potentialCarNumber = getUserInputForCarWith(message: "Enter car number:")
@@ -83,6 +89,8 @@ private func addNewAuto() {
     allCarsArray.append(newCar)
 }
 
+
+
 private func getUserInputForCarWith(message: String) -> String {
     print(message)
     var property = "unknown"
@@ -93,7 +101,7 @@ private func getUserInputForCarWith(message: String) -> String {
 }
 
 private func printListOfAuto(carArray: [Car]) {
-    if 0 == carArray.count {
+    if carArray.isEmpty {
         print("No cars in a list")
     } else {
         for car in carArray {
@@ -104,17 +112,17 @@ private func printListOfAuto(carArray: [Car]) {
 }
 
 private func printFilteredListOfAuto() {
-    var sortedCars = [Car]()
+    var filteredCars = [Car]()
     
     print("Enter body: sedan, liftback, hatchback or cabriolet")
     if let enteredBody = readLine() {
-        sortedCars = allCarsArray.filter {
-            $0.body.rawValue == enteredBody
+        filteredCars = allCarsArray.filter {
+            $0.body == Body(rawValue: enteredBody)
         }
     }
     
-    if sortedCars.count != 0 {
-        printListOfAuto(carArray: sortedCars)
+    if filteredCars.isEmpty != true {
+        printListOfAuto(carArray: filteredCars)
     } else {
         print("No cars with such body in a list")
     }

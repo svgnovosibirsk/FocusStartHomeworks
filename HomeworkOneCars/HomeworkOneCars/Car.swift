@@ -30,7 +30,7 @@ struct Car {
             """
             Manufacturer: \(self.manufacturer)
             Model: \(self.model)
-            Body: \(self.body.rawValue)
+            Body: \(self.body)
             Year of issue: \(yearOfIssue?.description ?? "-")
             \(carNumber?.count ?? 0 > 1 ? "Car number: \(String(describing: carNumber))" : "")
         """
