@@ -27,20 +27,17 @@ private func printMenu() {
 }
 
 private func checkMenuItemInput(menuItem: String) {
-    if let mItem = Int(menuItem) {
-        switch mItem {
-        case 0:
-            isContinue = false
-        case 1:
-            addNewAuto()
-        case 2:
-            printListOfAuto(carArray: allCarsArray)
-        case 3:
-            printFilteredListOfAuto()
-        default:
-            handleMistakes()
-        }
-    } else {
+    let mItem = Int(menuItem)
+    switch mItem {
+    case 0:
+        isContinue = false
+    case 1:
+        addNewAuto()
+    case 2:
+        printListOfAuto(carArray: allCarsArray)
+    case 3:
+        printFilteredListOfAuto()
+    default:
         handleMistakes()
     }
 }
@@ -57,20 +54,8 @@ private func addNewAuto() {
     
     model = getUserInputForCarWith(message: "Enter model:")
     
-    var gotBodyType = false
+    body = getCarBody()
     
-    while gotBodyType == false {
-        let potentialCarBody = getUserInputForCarWith(message: "Enter body: sedan, liftback, hatchback or cabriolet")
-        if potentialCarBody != "unknown" {
-            body = Body(rawValue: potentialCarBody) ?? .unknown
-            if body.rawValue != "unknown" {
-                gotBodyType = true
-            }
-        } else {
-            handleMistakes()
-        }
-    }
-   
     yearOfIssue = Int(getUserInputForCarWith(message: "Enter year of issue:"))
     
     let potentialCarNumber = getUserInputForCarWith(message: "Enter car number:")
@@ -89,7 +74,23 @@ private func addNewAuto() {
     allCarsArray.append(newCar)
 }
 
-
+private func getCarBody() -> Body {
+    var body: Body = .unknown
+    var gotBodyType = false
+    
+    while gotBodyType == false {
+        let potentialCarBody = getUserInputForCarWith(message: "Enter body: sedan, liftback, hatchback or cabriolet")
+        if potentialCarBody != "unknown" {
+            body = Body(rawValue: potentialCarBody) ?? .unknown
+            if body.rawValue != "unknown" {
+                gotBodyType = true
+            }
+        } else {
+            handleMistakes()
+        }
+    }
+    return body
+}
 
 private func getUserInputForCarWith(message: String) -> String {
     print(message)
@@ -114,11 +115,9 @@ private func printListOfAuto(carArray: [Car]) {
 private func printFilteredListOfAuto() {
     var filteredCars = [Car]()
     
-    print("Enter body: sedan, liftback, hatchback or cabriolet")
-    if let enteredBody = readLine() {
-        filteredCars = allCarsArray.filter {
-            $0.body == Body(rawValue: enteredBody)
-        }
+    let carBody = getCarBody()
+    filteredCars = allCarsArray.filter {
+        $0.body == carBody
     }
     
     if filteredCars.isEmpty != true {
