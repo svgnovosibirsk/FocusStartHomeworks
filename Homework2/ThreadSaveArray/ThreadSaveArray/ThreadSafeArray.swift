@@ -7,16 +7,16 @@
 
 import Foundation
 
-class ThreadSafeArray<Element> {
+ class ThreadSafeArray<Element> {
     private var internalArray: [Element] = []
-    let isolatedQueue = DispatchQueue(label: "com.isolated.queue", attributes: .concurrent)
+    private let isolatedQueue = DispatchQueue(label: "com.isolated.queue", attributes: .concurrent)
     
     var isEmpty: Bool {
-        var isFull = false
+        var empty = false
         isolatedQueue.sync {
-            isFull = internalArray.isEmpty
+            empty = internalArray.isEmpty
         }
-        return isFull
+        return empty
     }
     
     var  count: Int {
@@ -35,7 +35,9 @@ class ThreadSafeArray<Element> {
     
     func remove(at index: Int) {
         isolatedQueue.async(flags: .barrier) {
-            self.internalArray.remove(at: index)
+            if index < self.internalArray.count {
+                self.internalArray.remove(at: index)
+            }
         }
     }
     
@@ -54,13 +56,14 @@ class ThreadSafeArray<Element> {
             }
         }
     }
-
 }
 
 extension ThreadSafeArray where Element: Equatable {
     func contains(_ element: Element) -> Bool {
         var hasElement = false
-        isolatedQueue.sync { hasElement = self.internalArray.contains(element) }
+        isolatedQueue.sync {
+            hasElement = self.internalArray.contains(element)
+        }
         return hasElement
     }
 }

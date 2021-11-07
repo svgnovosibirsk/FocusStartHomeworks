@@ -37,4 +37,4 @@ arrayAppendGroup.notify(queue: DispatchQueue.global()) {
     print("threadSafeArray.count = \(threadSafeArray.count)")
 }
 
-sleep(2)
+_ = readLine()
