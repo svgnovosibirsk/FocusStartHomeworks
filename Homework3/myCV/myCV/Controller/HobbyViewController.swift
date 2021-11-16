@@ -9,11 +9,10 @@ import UIKit
 
 final class HobbyViewController: UIViewController {
     //MARK: - Views
-    private enum HobbyViews {
-        static let titleLabel = UILabel()
-        static let hobbyTextView = UITextView()
-        static let hobbyImageView = UIImageView()
-    }
+    private let titleLabel = UILabel()
+    private let hobbyTextView = UITextView()
+    private let hobbyImageView = UIImageView()
+    
     
     //MARK: - Constants
     private enum HobbyConstants {
@@ -59,29 +58,29 @@ private extension HobbyViewController {
     
     // MARK: - Set TitleLabel
     func setTitleLabel() {
-        HobbyViews.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        HobbyViews.titleLabel.textAlignment = .center
-        HobbyViews.titleLabel.text = "Хобби"
-        view.addSubview(HobbyViews.titleLabel)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textAlignment = .center
+        titleLabel.text = "Хобби"
+        view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
-            HobbyViews.titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            HobbyViews.titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: HobbyConstants.titleLabelTopAnchorConstant)
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: HobbyConstants.titleLabelTopAnchorConstant)
         ])
     }
     
     // MARK: - Set ExperienceTextView
     func setExperienceTextView() {
-        HobbyViews.hobbyTextView.translatesAutoresizingMaskIntoConstraints = false
-        HobbyViews.hobbyTextView.font = UIFont.systemFont(ofSize: HobbyConstants.hobbyTextViewFontSize)
-        HobbyViews.hobbyTextView.text = userProfile.hobby
-        view.addSubview(HobbyViews.hobbyTextView)
+        hobbyTextView.translatesAutoresizingMaskIntoConstraints = false
+        hobbyTextView.font = UIFont.systemFont(ofSize: HobbyConstants.hobbyTextViewFontSize)
+        hobbyTextView.text = userProfile.hobby
+        view.addSubview(hobbyTextView)
         
         NSLayoutConstraint.activate([
-            HobbyViews.hobbyTextView.topAnchor.constraint(equalTo: HobbyViews.titleLabel.bottomAnchor, constant: HobbyConstants.hobbyTextViewTopAnchorConstant),
-            HobbyViews.hobbyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: HobbyConstants.hobbyTextViewLeadingConstant),
-            HobbyViews.hobbyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: HobbyConstants.hobbyTextViewTrailingConstant),
-            HobbyViews.hobbyTextView.heightAnchor.constraint(equalToConstant: HobbyConstants.hobbyTextViewHeightAnchorConstant)
+            hobbyTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: HobbyConstants.hobbyTextViewTopAnchorConstant),
+            hobbyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: HobbyConstants.hobbyTextViewLeadingConstant),
+            hobbyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: HobbyConstants.hobbyTextViewTrailingConstant),
+            hobbyTextView.heightAnchor.constraint(equalToConstant: HobbyConstants.hobbyTextViewHeightAnchorConstant)
         ])
     }
     
@@ -105,11 +104,11 @@ private extension HobbyViewController {
     @objc func handleSegmentedControl(_ segmentedControl: UISegmentedControl) {
         switch (segmentedControl.selectedSegmentIndex) {
         case 0:
-            HobbyViews.hobbyImageView.image = UIImage(named: "swiftbird")
+            hobbyImageView.image = UIImage(named: "swiftbird")
         case 1:
-            HobbyViews.hobbyImageView.image = UIImage(named: "barbell")
+            hobbyImageView.image = UIImage(named: "barbell")
         case 2:
-            HobbyViews.hobbyImageView.image = UIImage(named: "snowboard")
+            hobbyImageView.image = UIImage(named: "snowboard")
         default:
             break
         }
@@ -117,18 +116,18 @@ private extension HobbyViewController {
     
     // MARK: - Set HobbyImageView
     func setHobbyImageView() {
-        HobbyViews.hobbyImageView.translatesAutoresizingMaskIntoConstraints = false
-        HobbyViews.hobbyImageView.layer.cornerRadius = HobbyViews.hobbyImageView.bounds.width / HobbyConstants.hobbyImageViewCornerRadiusDivider
-        HobbyViews.hobbyImageView.image = UIImage(named: "swiftbird")
-        HobbyViews.hobbyImageView.clipsToBounds = true
-        HobbyViews.hobbyImageView.contentMode = .scaleAspectFit
-        view.addSubview(HobbyViews.hobbyImageView)
+        hobbyImageView.translatesAutoresizingMaskIntoConstraints = false
+        hobbyImageView.layer.cornerRadius = hobbyImageView.bounds.width / HobbyConstants.hobbyImageViewCornerRadiusDivider
+        hobbyImageView.image = UIImage(named: "swiftbird")
+        hobbyImageView.clipsToBounds = true
+        hobbyImageView.contentMode = .scaleAspectFit
+        view.addSubview(hobbyImageView)
         
         NSLayoutConstraint.activate([
-            HobbyViews.hobbyImageView.widthAnchor.constraint(equalToConstant: HobbyConstants.hobbyImageViewWidthConstant),
-            HobbyViews.hobbyImageView.heightAnchor.constraint(equalToConstant: HobbyConstants.hobbyImageViewHeightConstant),
-            HobbyViews.hobbyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            HobbyViews.hobbyImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: HobbyConstants.hobbyTextViewTopConstant)
+            hobbyImageView.widthAnchor.constraint(equalToConstant: HobbyConstants.hobbyImageViewWidthConstant),
+            hobbyImageView.heightAnchor.constraint(equalToConstant: HobbyConstants.hobbyImageViewHeightConstant),
+            hobbyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            hobbyImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: HobbyConstants.hobbyTextViewTopConstant)
         ])
     }
 }
