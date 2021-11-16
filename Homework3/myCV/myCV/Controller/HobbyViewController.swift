@@ -7,11 +7,34 @@
 
 import UIKit
 
-class HobbyViewController: UIViewController {
+final class HobbyViewController: UIViewController {
     //MARK: - Views
     let titleLabel = UILabel()
     let hobbyTextView = UITextView()
     let hobbyImageView = UIImageView()
+    
+    //MARK: - Constants
+    let startSelectedSegmentIndex = 0
+    
+    let titleLabelFontSize: CGFloat = 25
+    let titleLabelTopAnchorConstant: CGFloat = 10
+    
+    let hobbyTextViewFontSize: CGFloat = 20
+    let hobbyTextViewTopAnchorConstant: CGFloat = 20
+    let hobbyTextViewLeadingConstant: CGFloat = 10
+    let hobbyTextViewTrailingConstant: CGFloat = -10
+    let hobbyTextViewHeightAnchorConstant: CGFloat = 250
+    
+    let segmentedControlLeadingConstant: CGFloat = 10
+    let segmentedControlTrailingConstant: CGFloat = -10
+    
+    let hobbyImageViewCornerRadiusDivider: CGFloat = 2
+    let hobbyImageViewWidthConstant: CGFloat = 250
+    let hobbyImageViewHeightConstant: CGFloat = 250
+    let hobbyTextViewTopConstant: CGFloat = 10
+    
+    
+    let userProfile = UserProfile()
     
     var segmentedControl = UISegmentedControl()
     
@@ -19,12 +42,12 @@ class HobbyViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setAllViews()
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = startSelectedSegmentIndex
     }
 }
 
-extension HobbyViewController {
-    private func setAllViews() {
+private extension HobbyViewController {
+    func setAllViews() {
         setTitleLabel()
         setExperienceTextView()
         setSegmentedControl()
@@ -32,49 +55,48 @@ extension HobbyViewController {
     }
     
     // MARK: - Set TitleLabel
-    private func setTitleLabel() {
+    func setTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 25)
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
         titleLabel.text = "Хобби"
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: titleLabelTopAnchorConstant)
         ])
     }
     
     // MARK: - Set ExperienceTextView
-    private func setExperienceTextView() {
+    func setExperienceTextView() {
         hobbyTextView.translatesAutoresizingMaskIntoConstraints = false
-        hobbyTextView.font = UIFont.systemFont(ofSize: 20)
-        hobbyTextView.text = UserProfile.instance.hobby
+        hobbyTextView.font = UIFont.systemFont(ofSize: hobbyTextViewFontSize)
+        hobbyTextView.text = userProfile.hobby
         view.addSubview(hobbyTextView)
         
         NSLayoutConstraint.activate([
-            hobbyTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            hobbyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            hobbyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            hobbyTextView.heightAnchor.constraint(equalToConstant: 250)
+            hobbyTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: hobbyTextViewTopAnchorConstant),
+            hobbyTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: hobbyTextViewLeadingConstant),
+            hobbyTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: hobbyTextViewTrailingConstant),
+            hobbyTextView.heightAnchor.constraint(equalToConstant: hobbyTextViewHeightAnchorConstant)
         ])
     }
     
     // MARK: - Set SegmentedControl
-    private func setSegmentedControl()  {
+    func setSegmentedControl()  {
         let items = ["Coding", "Powerlifting", "Snowboarding"]
         segmentedControl = UISegmentedControl(items: items)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentIndex = startSelectedSegmentIndex
         segmentedControl.addTarget(self, action: #selector(handleSegmentedControl(_:)), for: .valueChanged)
-        segmentedControl.selectedSegmentIndex = 1
         view.addSubview(segmentedControl)
         
         NSLayoutConstraint.activate([
             segmentedControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             segmentedControl.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: segmentedControlLeadingConstant),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: segmentedControlTrailingConstant),
         ])
     }
     
@@ -92,19 +114,19 @@ extension HobbyViewController {
     }
     
     // MARK: - Set HobbyImageView
-    private func setHobbyImageView() {
+    func setHobbyImageView() {
         hobbyImageView.translatesAutoresizingMaskIntoConstraints = false
-        hobbyImageView.layer.cornerRadius = hobbyImageView.bounds.width / 2
+        hobbyImageView.layer.cornerRadius = hobbyImageView.bounds.width / hobbyImageViewCornerRadiusDivider
         hobbyImageView.image = UIImage(named: "swiftbird")
         hobbyImageView.clipsToBounds = true
         hobbyImageView.contentMode = .scaleAspectFit
         view.addSubview(hobbyImageView)
         
         NSLayoutConstraint.activate([
-            hobbyImageView.widthAnchor.constraint(equalToConstant: 250),
-            hobbyImageView.heightAnchor.constraint(equalToConstant: 250),
+            hobbyImageView.widthAnchor.constraint(equalToConstant: hobbyImageViewWidthConstant),
+            hobbyImageView.heightAnchor.constraint(equalToConstant: hobbyImageViewHeightConstant),
             hobbyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            hobbyImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10)
+            hobbyImageView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: hobbyTextViewTopConstant)
         ])
     }
 }

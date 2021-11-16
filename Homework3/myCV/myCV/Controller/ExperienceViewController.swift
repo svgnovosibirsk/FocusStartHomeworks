@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExperienceViewController: UIViewController {
+final class ExperienceViewController: UIViewController {
     //MARK: - Views
     let titleLabel = UILabel()
     let experienceTextView = UITextView()
@@ -15,6 +15,27 @@ class ExperienceViewController: UIViewController {
     let swiftButton = UIButton()
     let cButton = UIButton()
     let fullNameLabel = UILabel()
+    
+    //MARK: - Constants
+    let titleLabelFontSize: CGFloat = 25
+    let titleLabelTopAnchorConstant: CGFloat = 10
+    
+    let experienceTextViewFontSize: CGFloat = 20
+    let experienceTextViewHuggingPriority: Float = 260
+    let experienceTextViewTopAnchorConstant: CGFloat = 20
+    let experienceTextViewLeadingConstant: CGFloat = 10
+    let experienceTextViewTrailingConstant: CGFloat = -10
+    let experienceTextViewHeightAnchorMultyplyer: CGFloat = 0.4
+    
+    let buttonsStackViewSpacing: CGFloat = 10
+    let buttonsStackViewBottomAnchorConstant: CGFloat = -100
+    let buttonsStackViewLeadingConstant: CGFloat = 100
+    let buttonsStackViewTrailingConstant: CGFloat = -100
+    
+    let lenguagesButtonsFontSize: CGFloat = 25
+    let lenguagesButtonsCornerRadius: CGFloat = 5
+    
+    let userProfile = UserProfile()
     
     var buttonsStackView = UIStackView()
     
@@ -29,80 +50,82 @@ class ExperienceViewController: UIViewController {
     }
 }
 
-extension ExperienceViewController {
+private extension ExperienceViewController {
     // MARK: - Set TitleLabel
-    private func setTitleLabel() {
+    func setTitleLabel() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: 25)
+        titleLabel.font = UIFont.systemFont(ofSize: titleLabelFontSize)
         titleLabel.textAlignment = .center
         titleLabel.text = "Опыт разработки"
         view.addSubview(titleLabel)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: titleLabelTopAnchorConstant)
         ])
     }
     
     // MARK: - Set ExperienceTextView
-    private func setExperienceTextView() {
+    func setExperienceTextView() {
         experienceTextView.translatesAutoresizingMaskIntoConstraints = false
-        experienceTextView.font = UIFont.systemFont(ofSize: 20)
-        experienceTextView.text = UserProfile.instance.skills
-        experienceTextView.setContentHuggingPriority(UILayoutPriority(rawValue: 260), for: .vertical)
+        experienceTextView.font = UIFont.systemFont(ofSize: experienceTextViewFontSize)
+        experienceTextView.text = userProfile.skills
+        experienceTextView.setContentHuggingPriority(UILayoutPriority(rawValue: experienceTextViewHuggingPriority), for: .vertical)
+        experienceTextView.isEditable = false
+        experienceTextView.isSelectable = false
         view.addSubview(experienceTextView)
         
         NSLayoutConstraint.activate([
-            experienceTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            experienceTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            experienceTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            experienceTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.43)
+            experienceTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: experienceTextViewTopAnchorConstant),
+            experienceTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: experienceTextViewLeadingConstant),
+            experienceTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: experienceTextViewTrailingConstant),
+            experienceTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * experienceTextViewHeightAnchorMultyplyer)
         ])
     }
     
     // MARK: - Set ButtonsStackView
-    private func setButtonsStackView() {
+    func setButtonsStackView() {
         setButtons()
         
         buttonsStackView = UIStackView(arrangedSubviews: [cSharpButton, swiftButton, cButton])
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonsStackView.axis = .vertical
         buttonsStackView.distribution = .fillEqually
-        buttonsStackView.spacing = 10
+        buttonsStackView.spacing = buttonsStackViewSpacing
         view.addSubview(buttonsStackView)
         
         NSLayoutConstraint.activate([
-            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -100)
+            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: buttonsStackViewBottomAnchorConstant),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonsStackViewLeadingConstant),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: buttonsStackViewTrailingConstant)
         ])
     }
     
     // MARK: - Set Buttons
-    private func setButtons() {
+    func setButtons() {
         cSharpButton.translatesAutoresizingMaskIntoConstraints = false
         cSharpButton.isUserInteractionEnabled = true
         cSharpButton.setTitle("C#", for: .normal)
         cSharpButton.setTitleColor(.white, for: .normal)
         cSharpButton.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        cSharpButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        cSharpButton.layer.cornerRadius = 5
+        cSharpButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
+        cSharpButton.layer.cornerRadius = lenguagesButtonsCornerRadius
         cSharpButton.addTarget(self, action: #selector(cSharpBtnPressed), for: .touchUpInside)
         
         swiftButton.translatesAutoresizingMaskIntoConstraints = false
         swiftButton.setTitle("Swift", for: .normal)
         swiftButton.setTitleColor(.white, for: .normal)
         swiftButton.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
-        swiftButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        swiftButton.layer.cornerRadius = 5
+        swiftButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
+        swiftButton.layer.cornerRadius = lenguagesButtonsCornerRadius
         swiftButton.addTarget(self, action: #selector(swiftBtnPressed), for: .touchUpInside)
         
         cButton.translatesAutoresizingMaskIntoConstraints = false
         cButton.setTitle("C", for: .normal)
         cButton.setTitleColor(.white, for: .normal)
         cButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        cButton.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-        cButton.layer.cornerRadius = 5
+        cButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
+        cButton.layer.cornerRadius = lenguagesButtonsCornerRadius
         cButton.addTarget(self, action: #selector(cBtnPressed), for: .touchUpInside)
     }
     

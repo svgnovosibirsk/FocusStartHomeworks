@@ -15,6 +15,7 @@
 		1E7E2F4B273FDFBB0014AB9F /* ExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E2F4A273FDFBB0014AB9F /* ExperienceViewController.swift */; };
 		1E7E2F4F273FDFD90014AB9F /* HobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E2F4E273FDFD90014AB9F /* HobbyViewController.swift */; };
 		1E7E2F55273FE2850014AB9F /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7E2F54273FE2850014AB9F /* UserProfile.swift */; };
+		1ED87C42274356D50096F8F2 /* TabBarControllerGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED87C41274356D50096F8F2 /* TabBarControllerGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		1E7E2F4A273FDFBB0014AB9F /* ExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceViewController.swift; sourceTree = "<group>"; };
 		1E7E2F4E273FDFD90014AB9F /* HobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbyViewController.swift; sourceTree = "<group>"; };
 		1E7E2F54273FE2850014AB9F /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		1ED87C41274356D50096F8F2 /* TabBarControllerGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				1E7E2F33273FDD340014AB9F /* AppDelegate.swift */,
 				1E7E2F35273FDD340014AB9F /* SceneDelegate.swift */,
+				1ED87C44274356E40096F8F2 /* Utilites */,
 				1E7E2F57273FE28E0014AB9F /* Model */,
 				1E7E2F52273FDFEC0014AB9F /* Controller */,
 				1E7E2F3C273FDD460014AB9F /* Assets.xcassets */,
@@ -87,6 +90,14 @@
 				1E7E2F54273FE2850014AB9F /* UserProfile.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1ED87C44274356E40096F8F2 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				1ED87C41274356D50096F8F2 /* TabBarControllerGenerator.swift */,
+			);
+			path = Utilites;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +174,7 @@
 				1E7E2F55273FE2850014AB9F /* UserProfile.swift in Sources */,
 				1E7E2F4F273FDFD90014AB9F /* HobbyViewController.swift in Sources */,
 				1E7E2F34273FDD340014AB9F /* AppDelegate.swift in Sources */,
+				1ED87C42274356D50096F8F2 /* TabBarControllerGenerator.swift in Sources */,
 				1E7E2F36273FDD340014AB9F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
