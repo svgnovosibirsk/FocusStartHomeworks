@@ -9,35 +9,40 @@ import UIKit
 
 final class ExperienceViewController: UIViewController {
     //MARK: - Views
-    let titleLabel = UILabel()
-    let experienceTextView = UITextView()
-    let cSharpButton = UIButton()
-    let swiftButton = UIButton()
-    let cButton = UIButton()
-    let fullNameLabel = UILabel()
+    private enum ExperienceViews {
+        static let titleLabel = UILabel()
+        static let experienceTextView = UITextView()
+        static let cSharpButton = UIButton()
+        static let swiftButton = UIButton()
+        static let cButton = UIButton()
+        static let fullNameLabel = UILabel()
+    }
     
     //MARK: - Constants
-    let titleLabelFontSize: CGFloat = 25
-    let titleLabelTopAnchorConstant: CGFloat = 10
+    private enum ExperienceConstants {
+        static let titleLabelFontSize: CGFloat = 25
+        static let titleLabelTopAnchorConstant: CGFloat = 10
+        
+        static let experienceTextViewFontSize: CGFloat = 20
+        static let experienceTextViewHuggingPriority: Float = 260
+        static let experienceTextViewTopAnchorConstant: CGFloat = 20
+        static let experienceTextViewLeadingConstant: CGFloat = 10
+        static let experienceTextViewTrailingConstant: CGFloat = -10
+        static let experienceTextViewHeightAnchorMultyplyer: CGFloat = 0.4
+        
+        static let buttonsStackViewSpacing: CGFloat = 10
+        static let buttonsStackViewBottomAnchorConstant: CGFloat = -100
+        static let buttonsStackViewLeadingConstant: CGFloat = 100
+        static let buttonsStackViewTrailingConstant: CGFloat = -100
+        
+        static let lenguagesButtonsFontSize: CGFloat = 25
+        static let lenguagesButtonsCornerRadius: CGFloat = 5
+    }
+   
     
-    let experienceTextViewFontSize: CGFloat = 20
-    let experienceTextViewHuggingPriority: Float = 260
-    let experienceTextViewTopAnchorConstant: CGFloat = 20
-    let experienceTextViewLeadingConstant: CGFloat = 10
-    let experienceTextViewTrailingConstant: CGFloat = -10
-    let experienceTextViewHeightAnchorMultyplyer: CGFloat = 0.4
+    private let userProfile = UserProfile()
     
-    let buttonsStackViewSpacing: CGFloat = 10
-    let buttonsStackViewBottomAnchorConstant: CGFloat = -100
-    let buttonsStackViewLeadingConstant: CGFloat = 100
-    let buttonsStackViewTrailingConstant: CGFloat = -100
-    
-    let lenguagesButtonsFontSize: CGFloat = 25
-    let lenguagesButtonsCornerRadius: CGFloat = 5
-    
-    let userProfile = UserProfile()
-    
-    var buttonsStackView = UIStackView()
+    private var buttonsStackView = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,33 +58,32 @@ final class ExperienceViewController: UIViewController {
 private extension ExperienceViewController {
     // MARK: - Set TitleLabel
     func setTitleLabel() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemFont(ofSize: titleLabelFontSize)
-        titleLabel.textAlignment = .center
-        titleLabel.text = "Опыт разработки"
-        view.addSubview(titleLabel)
+        ExperienceViews.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        ExperienceViews.titleLabel.font = UIFont.systemFont(ofSize: ExperienceConstants.titleLabelFontSize)
+        ExperienceViews.titleLabel.text = "Опыт разработки"
+        view.addSubview(ExperienceViews.titleLabel)
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: titleLabelTopAnchorConstant)
+            ExperienceViews.titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ExperienceViews.titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: ExperienceConstants.titleLabelTopAnchorConstant)
         ])
     }
     
     // MARK: - Set ExperienceTextView
     func setExperienceTextView() {
-        experienceTextView.translatesAutoresizingMaskIntoConstraints = false
-        experienceTextView.font = UIFont.systemFont(ofSize: experienceTextViewFontSize)
-        experienceTextView.text = userProfile.skills
-        experienceTextView.setContentHuggingPriority(UILayoutPriority(rawValue: experienceTextViewHuggingPriority), for: .vertical)
-        experienceTextView.isEditable = false
-        experienceTextView.isSelectable = false
-        view.addSubview(experienceTextView)
+        ExperienceViews.experienceTextView.translatesAutoresizingMaskIntoConstraints = false
+        ExperienceViews.experienceTextView.font = UIFont.systemFont(ofSize: ExperienceConstants.experienceTextViewFontSize)
+        ExperienceViews.experienceTextView.text = userProfile.skills
+        ExperienceViews.experienceTextView.setContentHuggingPriority(UILayoutPriority(rawValue: ExperienceConstants.experienceTextViewHuggingPriority), for: .vertical)
+        ExperienceViews.experienceTextView.isEditable = false
+        ExperienceViews.experienceTextView.isSelectable = false
+        view.addSubview(ExperienceViews.experienceTextView)
         
         NSLayoutConstraint.activate([
-            experienceTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: experienceTextViewTopAnchorConstant),
-            experienceTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: experienceTextViewLeadingConstant),
-            experienceTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: experienceTextViewTrailingConstant),
-            experienceTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * experienceTextViewHeightAnchorMultyplyer)
+            ExperienceViews.experienceTextView.topAnchor.constraint(equalTo: ExperienceViews.titleLabel.bottomAnchor, constant: ExperienceConstants.experienceTextViewTopAnchorConstant),
+            ExperienceViews.experienceTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ExperienceConstants.experienceTextViewLeadingConstant),
+            ExperienceViews.experienceTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ExperienceConstants.experienceTextViewTrailingConstant),
+            ExperienceViews.experienceTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * ExperienceConstants.experienceTextViewHeightAnchorMultyplyer)
         ])
     }
     
@@ -87,46 +91,46 @@ private extension ExperienceViewController {
     func setButtonsStackView() {
         setButtons()
         
-        buttonsStackView = UIStackView(arrangedSubviews: [cSharpButton, swiftButton, cButton])
+        buttonsStackView = UIStackView(arrangedSubviews: [ExperienceViews.cSharpButton, ExperienceViews.swiftButton, ExperienceViews.cButton])
         buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonsStackView.axis = .vertical
         buttonsStackView.distribution = .fillEqually
-        buttonsStackView.spacing = buttonsStackViewSpacing
+        buttonsStackView.spacing = ExperienceConstants.buttonsStackViewSpacing
         view.addSubview(buttonsStackView)
         
         NSLayoutConstraint.activate([
-            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: buttonsStackViewBottomAnchorConstant),
-            buttonsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: buttonsStackViewLeadingConstant),
-            buttonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: buttonsStackViewTrailingConstant)
+            buttonsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: ExperienceConstants.buttonsStackViewBottomAnchorConstant),
+            buttonsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: ExperienceConstants.buttonsStackViewLeadingConstant),
+            buttonsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: ExperienceConstants.buttonsStackViewTrailingConstant)
         ])
     }
     
     // MARK: - Set Buttons
     func setButtons() {
-        cSharpButton.translatesAutoresizingMaskIntoConstraints = false
-        cSharpButton.isUserInteractionEnabled = true
-        cSharpButton.setTitle("C#", for: .normal)
-        cSharpButton.setTitleColor(.white, for: .normal)
-        cSharpButton.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        cSharpButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
-        cSharpButton.layer.cornerRadius = lenguagesButtonsCornerRadius
-        cSharpButton.addTarget(self, action: #selector(cSharpBtnPressed), for: .touchUpInside)
+        ExperienceViews.cSharpButton.translatesAutoresizingMaskIntoConstraints = false
+        ExperienceViews.cSharpButton.isUserInteractionEnabled = true
+        ExperienceViews.cSharpButton.setTitle("C#", for: .normal)
+        ExperienceViews.cSharpButton.setTitleColor(.white, for: .normal)
+        ExperienceViews.cSharpButton.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        ExperienceViews.cSharpButton.titleLabel?.font = UIFont.systemFont(ofSize: ExperienceConstants.lenguagesButtonsFontSize)
+        ExperienceViews.cSharpButton.layer.cornerRadius = ExperienceConstants.lenguagesButtonsCornerRadius
+        ExperienceViews.cSharpButton.addTarget(self, action: #selector(cSharpBtnPressed), for: .touchUpInside)
         
-        swiftButton.translatesAutoresizingMaskIntoConstraints = false
-        swiftButton.setTitle("Swift", for: .normal)
-        swiftButton.setTitleColor(.white, for: .normal)
-        swiftButton.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
-        swiftButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
-        swiftButton.layer.cornerRadius = lenguagesButtonsCornerRadius
-        swiftButton.addTarget(self, action: #selector(swiftBtnPressed), for: .touchUpInside)
+        ExperienceViews.swiftButton.translatesAutoresizingMaskIntoConstraints = false
+        ExperienceViews.swiftButton.setTitle("Swift", for: .normal)
+        ExperienceViews.swiftButton.setTitleColor(.white, for: .normal)
+        ExperienceViews.swiftButton.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+        ExperienceViews.swiftButton.titleLabel?.font = UIFont.systemFont(ofSize: ExperienceConstants.lenguagesButtonsFontSize)
+        ExperienceViews.swiftButton.layer.cornerRadius = ExperienceConstants.lenguagesButtonsCornerRadius
+        ExperienceViews.swiftButton.addTarget(self, action: #selector(swiftBtnPressed), for: .touchUpInside)
         
-        cButton.translatesAutoresizingMaskIntoConstraints = false
-        cButton.setTitle("C", for: .normal)
-        cButton.setTitleColor(.white, for: .normal)
-        cButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
-        cButton.titleLabel?.font = UIFont.systemFont(ofSize: lenguagesButtonsFontSize)
-        cButton.layer.cornerRadius = lenguagesButtonsCornerRadius
-        cButton.addTarget(self, action: #selector(cBtnPressed), for: .touchUpInside)
+        ExperienceViews.cButton.translatesAutoresizingMaskIntoConstraints = false
+        ExperienceViews.cButton.setTitle("C", for: .normal)
+        ExperienceViews.cButton.setTitleColor(.white, for: .normal)
+        ExperienceViews.cButton.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+        ExperienceViews.cButton.titleLabel?.font = UIFont.systemFont(ofSize: ExperienceConstants.lenguagesButtonsFontSize)
+        ExperienceViews.cButton.layer.cornerRadius = ExperienceConstants.lenguagesButtonsCornerRadius
+        ExperienceViews.cButton.addTarget(self, action: #selector(cBtnPressed), for: .touchUpInside)
     }
     
     //MARK: - Button's methods

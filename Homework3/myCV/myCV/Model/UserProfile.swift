@@ -8,7 +8,6 @@
 import Foundation
 
 struct UserProfile {
-    //static let instance = UserProfile()
     
     let name = "Сергей"
     let lastName = "Головин"

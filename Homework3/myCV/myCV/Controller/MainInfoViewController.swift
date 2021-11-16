@@ -9,66 +9,67 @@ import UIKit
 
 final class MainInfoViewController: UIViewController {
     //MARK: - Views
-    let photoView = UIImageView()
-    let fullNameLabel =  UILabel()
-    let ageLabel = UILabel()
-    let cityLabel = UILabel()
-    let universityLabel = UILabel()
-    let triangleView = UIImageView()
-    let circleView = UIImageView()
-    let squareView = UIImageView()
+    private enum MainInfoViews {
+        static let photoView = UIImageView()
+        static let fullNameLabel =  UILabel()
+        static let ageLabel = UILabel()
+        static let cityLabel = UILabel()
+        static let universityLabel = UILabel()
+        static let triangleView = UIImageView()
+        static let circleView = UIImageView()
+        static let squareView = UIImageView()
+    }
     
     //MARK: - Constants
+    private enum MainInfoConstants {
+        static let figureSize: CGFloat = 100
+        
+        static let photoSize: CGFloat = UIScreen.main.bounds.height * 0.25
+        static let photoCornerRadius: CGFloat = 10
+        static let photoViewTopConstant: CGFloat = 50
+        static let photoViewCornerRadiusDivider: CGFloat =  2
+        static let photoViewBorderWidthWhenTapped: CGFloat = 1
+        static let photoViewBorderWidth: CGFloat = 0
+        static let photoViewAnimationDelay: TimeInterval = 2
+        static let photoViewCornerRadius: CGFloat = 10
+        
+        static let fullNameLabelFontSize: CGFloat = 25
+        static let fullNameLabelTopConstant: CGFloat = 20
+        static let fullNameLabelLeadingConstant: CGFloat = 50
+        static let fullNameLabelTrailingConstant: CGFloat = -50
+        
+        static let ageLabelFontSize: CGFloat = 20
+        static let ageLabelTopConstant: CGFloat = 10
+        
+        static let cityLabelFontSize: CGFloat = 20
+        static let cityLabelTopConstant: CGFloat = 10
+        
+        static let universityLabelFontSize: CGFloat = 22
+        static let universityLabelNumberOfLines = 0
+        static let universityLabelLeadingConstant: CGFloat = 10
+        static let universityLabelTrailingConstant: CGFloat = -10
+        static let universityLabelTopConstant: CGFloat = 20
+        
+        static let triangleSize: CGFloat = 120
+        static let triangleViewLeadingConstant: CGFloat = 30
+        static let triangleViewBottomConstant: CGFloat = -40
+        static let triangleAlphaWhenTapped: CGFloat = 0.2
+        static let triangleAlpha: CGFloat = 1
+        static let triangleTapAnimationDelay: TimeInterval = 1
+        
+        static let circleViewBottomConstant: CGFloat = -50
+        static let circleViewScaleWhenTapped: CGFloat = 1.3
+        static let circleViewTapAnimationDelay: TimeInterval = 0.5
+        
+        static let squareViewTrailingConstant: CGFloat = -30
+        static let squareViewBottomConstant: CGFloat = -50
+        static let squareViewRotationAngleDivider: CGFloat = 2
+        static let squareViewTapAnimationDelay: TimeInterval = 1
+        
+        static let animationDiration: TimeInterval = 1
+    }
     
-    let figureSize: CGFloat = 100
-    
-    let photoSize: CGFloat = UIScreen.main.bounds.height * 0.25
-    let photoCornerRadius: CGFloat = 10
-    let photoViewTopConstant: CGFloat = 50
-    let photoViewCornerRadiusDivider: CGFloat =  2
-    let photoViewBorderWidthWhenTapped: CGFloat = 1
-    let photoViewBorderWidth: CGFloat = 0
-    let photoViewAnimationDelay: TimeInterval = 2
-    let photoViewCornerRadius: CGFloat = 10
-    
-    let fullNameLabelFontSize: CGFloat = 25
-    let fullNameLabelTopConstant: CGFloat = 20
-    let fullNameLabelLeadingConstant: CGFloat = 50
-    let fullNameLabelTrailingConstant: CGFloat = -50
-    
-    let ageLabelFontSize: CGFloat = 20
-    let ageLabelTopConstant: CGFloat = 10
-    
-    let cityLabelFontSize: CGFloat = 20
-    let cityLabelTopConstant: CGFloat = 10
-    
-    let universityLabelFontSize: CGFloat = 22
-    let universityLabelNumberOfLines = 0
-    let universityLabelLeadingConstant: CGFloat = 10
-    let universityLabelTrailingConstant: CGFloat = -10
-    let universityLabelTopConstant: CGFloat = 20
-    
-    let triangleSize: CGFloat = 120
-    let triangleViewLeadingConstant: CGFloat = 30
-    let triangleViewBottomConstant: CGFloat = -40
-    let triangleAlphaWhenTapped: CGFloat = 0.2
-    let triangleAlpha: CGFloat = 1
-    let triangleTapAnimationDelay: TimeInterval = 1
-    
-    let circleViewBottomConstant: CGFloat = -50
-    let circleViewScaleWhenTapped: CGFloat = 1.3
-    let circleViewTapAnimationDelay: TimeInterval = 0.5
-    
-    let squareViewTrailingConstant: CGFloat = -30
-    let squareViewBottomConstant: CGFloat = -50
-    let squareViewRotationAngleDivider: CGFloat = 2
-    let squareViewTapAnimationDelay: TimeInterval = 1
-    
-    let animationDiration: TimeInterval = 1
-    
-    
-    
-    let userProfile = UserProfile()
+    private let userProfile = UserProfile()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,130 +102,130 @@ private extension MainInfoViewController {
     
     // MARK: - Set PhotoView
     func setPhoto() {
-        photoView.translatesAutoresizingMaskIntoConstraints = false
-        photoView.layer.cornerRadius = photoCornerRadius
-        photoView.image = UIImage(named: userProfile.photoName)
-        photoView.clipsToBounds = true
-        photoView.contentMode = .scaleAspectFit
-        photoView.isUserInteractionEnabled = true
-        view.addSubview(photoView)
+        MainInfoViews.photoView.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.photoView.layer.cornerRadius = MainInfoConstants.photoViewCornerRadius
+        MainInfoViews.photoView.image = UIImage(named: userProfile.photoName)
+        MainInfoViews.photoView.contentMode = .scaleAspectFit
+        MainInfoViews.photoView.clipsToBounds = true
+        MainInfoViews.photoView.isUserInteractionEnabled = true
+        view.addSubview(MainInfoViews.photoView)
         
         NSLayoutConstraint.activate([
-            photoView.widthAnchor.constraint(equalToConstant: photoSize),
-            photoView.heightAnchor.constraint(equalToConstant: photoSize),
-            photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            photoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: photoViewTopConstant)
+            MainInfoViews.photoView.widthAnchor.constraint(equalToConstant: MainInfoConstants.photoSize),
+            MainInfoViews.photoView.heightAnchor.constraint(equalToConstant: MainInfoConstants.photoSize),
+            MainInfoViews.photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            MainInfoViews.photoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: MainInfoConstants.photoViewTopConstant)
         ])
     }
     
     // MARK: - Set FullNameLabel
     func setFullNameLabel() {
-        fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.font = UIFont.systemFont(ofSize: fullNameLabelFontSize)
-        fullNameLabel.textAlignment = .center
+        MainInfoViews.fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.fullNameLabel.font = UIFont.systemFont(ofSize: MainInfoConstants.fullNameLabelFontSize)
+        MainInfoViews.fullNameLabel.textAlignment = .center
         let fullName = userProfile.lastName + " " + userProfile.name
-        fullNameLabel.text = fullName
-        view.addSubview(fullNameLabel)
+        MainInfoViews.fullNameLabel.text = fullName
+        view.addSubview(MainInfoViews.fullNameLabel)
         
         NSLayoutConstraint.activate([
-            fullNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: fullNameLabelLeadingConstant),
-            fullNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: fullNameLabelTrailingConstant),
-            fullNameLabel.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: fullNameLabelTopConstant)
+            MainInfoViews.fullNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: MainInfoConstants.fullNameLabelLeadingConstant),
+            MainInfoViews.fullNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: MainInfoConstants.fullNameLabelTrailingConstant),
+            MainInfoViews.fullNameLabel.topAnchor.constraint(equalTo: MainInfoViews.photoView.bottomAnchor, constant: MainInfoConstants.fullNameLabelTopConstant)
         ])
     }
     
     // MARK: - Set AgeLabel
     func setAgeLabel() {
-        ageLabel.translatesAutoresizingMaskIntoConstraints = false
-        ageLabel.font = UIFont.systemFont(ofSize: ageLabelFontSize)
-        ageLabel.textAlignment = .center
-        ageLabel.text = "\(userProfile.age) лет"
-        view.addSubview(ageLabel)
+        MainInfoViews.ageLabel.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.ageLabel.font = UIFont.systemFont(ofSize: MainInfoConstants.ageLabelFontSize)
+        MainInfoViews.ageLabel.textAlignment = .center
+        MainInfoViews.ageLabel.text = "\(userProfile.age) лет"
+        view.addSubview(MainInfoViews.ageLabel)
         
         NSLayoutConstraint.activate([
-            ageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            ageLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: ageLabelTopConstant)
+            MainInfoViews.ageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            MainInfoViews.ageLabel.topAnchor.constraint(equalTo: MainInfoViews.fullNameLabel.bottomAnchor, constant: MainInfoConstants.ageLabelTopConstant)
         ])
     }
     
     // MARK: - Set CityLabel
     func setCityLabel() {
-        cityLabel.translatesAutoresizingMaskIntoConstraints = false
-        cityLabel.font = UIFont.systemFont(ofSize: cityLabelFontSize)
-        cityLabel.textAlignment = .center
-        cityLabel.text = userProfile.city
-        view.addSubview(cityLabel)
+        MainInfoViews.cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.cityLabel.font = UIFont.systemFont(ofSize: MainInfoConstants.cityLabelFontSize)
+        MainInfoViews.cityLabel.textAlignment = .center
+        MainInfoViews.cityLabel.text = userProfile.city
+        view.addSubview(MainInfoViews.cityLabel)
         
         NSLayoutConstraint.activate([
-            cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            cityLabel.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: cityLabelTopConstant)
+            MainInfoViews.cityLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            MainInfoViews.cityLabel.topAnchor.constraint(equalTo: MainInfoViews.ageLabel.bottomAnchor, constant: MainInfoConstants.cityLabelTopConstant)
         ])
     }
     
     // MARK: - Set UniversityLabel
     func setUniversityLabel() {
-        universityLabel.translatesAutoresizingMaskIntoConstraints = false
-        universityLabel.font = UIFont.systemFont(ofSize: universityLabelFontSize)
-        universityLabel.textAlignment = .center
-        universityLabel.numberOfLines = universityLabelNumberOfLines
-        universityLabel.text = userProfile.university
-        view.addSubview(universityLabel)
+        MainInfoViews.universityLabel.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.universityLabel.font = UIFont.systemFont(ofSize: MainInfoConstants.universityLabelFontSize)
+        MainInfoViews.universityLabel.textAlignment = .center
+        MainInfoViews.universityLabel.numberOfLines = MainInfoConstants.universityLabelNumberOfLines
+        MainInfoViews.universityLabel.text = userProfile.university
+        view.addSubview(MainInfoViews.universityLabel)
         
         NSLayoutConstraint.activate([
-            universityLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: universityLabelLeadingConstant),
-            universityLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: universityLabelTrailingConstant),
-            universityLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: universityLabelTopConstant)
+            MainInfoViews.universityLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: MainInfoConstants.universityLabelLeadingConstant),
+            MainInfoViews.universityLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: MainInfoConstants.universityLabelTrailingConstant),
+            MainInfoViews.universityLabel.topAnchor.constraint(equalTo: MainInfoViews.cityLabel.bottomAnchor, constant: MainInfoConstants.universityLabelTopConstant)
         ])
     }
     
     // MARK: - Set Triangle
     func setTriangle() {
-        triangleView.translatesAutoresizingMaskIntoConstraints = false
-        triangleView.image = UIImage(named: "triangle")
-        triangleView.clipsToBounds = true
-        triangleView.contentMode = .scaleAspectFit
-        triangleView.isUserInteractionEnabled = true
-        view.addSubview(triangleView)
+        MainInfoViews.triangleView.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.triangleView.image = UIImage(named: "triangle")
+        MainInfoViews.triangleView.clipsToBounds = true
+        MainInfoViews.triangleView.contentMode = .scaleAspectFit
+        MainInfoViews.triangleView.isUserInteractionEnabled = true
+        view.addSubview(MainInfoViews.triangleView)
         
         NSLayoutConstraint.activate([
-            triangleView.widthAnchor.constraint(equalToConstant: triangleSize),
-            triangleView.heightAnchor.constraint(equalToConstant: triangleSize),
-            triangleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: triangleViewLeadingConstant),
-            triangleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: triangleViewBottomConstant)
+            MainInfoViews.triangleView.widthAnchor.constraint(equalToConstant: MainInfoConstants.triangleSize),
+            MainInfoViews.triangleView.heightAnchor.constraint(equalToConstant: MainInfoConstants.triangleSize),
+            MainInfoViews.triangleView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: MainInfoConstants.triangleViewLeadingConstant),
+            MainInfoViews.triangleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: MainInfoConstants.triangleViewBottomConstant)
         ])
     }
     
     // MARK: - Set Circle
     func setCircle() {
-        circleView.translatesAutoresizingMaskIntoConstraints = false
-        circleView.image = UIImage(named: "circle")
-        circleView.clipsToBounds = true
-        circleView.contentMode = .scaleAspectFit
-        circleView.isUserInteractionEnabled = true
-        view.addSubview(circleView)
+        MainInfoViews.circleView.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.circleView.image = UIImage(named: "circle")
+        MainInfoViews.circleView.clipsToBounds = true
+        MainInfoViews.circleView.contentMode = .scaleAspectFit
+        MainInfoViews.circleView.isUserInteractionEnabled = true
+        view.addSubview(MainInfoViews.circleView)
         
         NSLayoutConstraint.activate([
-            circleView.widthAnchor.constraint(equalToConstant: figureSize),
-            circleView.heightAnchor.constraint(equalToConstant: figureSize),
-            circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            circleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: circleViewBottomConstant)
+            MainInfoViews.circleView.widthAnchor.constraint(equalToConstant: MainInfoConstants.figureSize),
+            MainInfoViews.circleView.heightAnchor.constraint(equalToConstant: MainInfoConstants.figureSize),
+            MainInfoViews.circleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            MainInfoViews.circleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: MainInfoConstants.circleViewBottomConstant)
         ])
     }
     
     // MARK: - Set Square
     func setSquare() {
-        squareView.translatesAutoresizingMaskIntoConstraints = false
-        squareView.image = UIImage(named: "square")
-        squareView.clipsToBounds = true
-        squareView.contentMode = .scaleAspectFit
-        squareView.isUserInteractionEnabled = true
-        view.addSubview(squareView)
+        MainInfoViews.squareView.translatesAutoresizingMaskIntoConstraints = false
+        MainInfoViews.squareView.image = UIImage(named: "square")
+        MainInfoViews.squareView.clipsToBounds = true
+        MainInfoViews.squareView.contentMode = .scaleAspectFit
+        MainInfoViews.squareView.isUserInteractionEnabled = true
+        view.addSubview(MainInfoViews.squareView)
         
         NSLayoutConstraint.activate([
-            squareView.widthAnchor.constraint(equalToConstant: figureSize),
-            squareView.heightAnchor.constraint(equalToConstant: figureSize),
-            squareView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: squareViewTrailingConstant),
-            squareView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: squareViewBottomConstant)
+            MainInfoViews.squareView.widthAnchor.constraint(equalToConstant: MainInfoConstants.figureSize),
+            MainInfoViews.squareView.heightAnchor.constraint(equalToConstant: MainInfoConstants.figureSize),
+            MainInfoViews.squareView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: MainInfoConstants.squareViewTrailingConstant),
+            MainInfoViews.squareView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: MainInfoConstants.squareViewBottomConstant)
         ])
     }
 }
@@ -233,19 +234,19 @@ private extension MainInfoViewController {
     // MARK: - Set Tap Gesture Recognizer To Photo
     func setTapGestureRecognizerToPhoto() {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        photoView.addGestureRecognizer(tapGR)
+        MainInfoViews.photoView.addGestureRecognizer(tapGR)
     }
 
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        UIView.animate(withDuration: animationDiration) {
-            self.photoView.layer.cornerRadius = self.photoView.bounds.width / self.photoViewCornerRadiusDivider
-            self.photoView.layer.borderWidth = self.photoViewBorderWidthWhenTapped
-            self.photoView.layer.borderColor = UIColor.lightGray.cgColor
+        UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+            MainInfoViews.photoView.layer.cornerRadius = MainInfoViews.photoView.bounds.width / MainInfoConstants.photoViewCornerRadiusDivider
+            MainInfoViews.photoView.layer.borderWidth = MainInfoConstants.photoViewBorderWidthWhenTapped
+            MainInfoViews.photoView.layer.borderColor = UIColor.lightGray.cgColor
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + photoViewAnimationDelay) {
-            UIView.animate(withDuration: self.animationDiration) {
-                self.photoView.layer.borderWidth = self.photoViewBorderWidth
-                self.photoView.layer.cornerRadius = self.photoViewCornerRadius
+        DispatchQueue.main.asyncAfter(deadline: .now() + MainInfoConstants.photoViewAnimationDelay) {
+            UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+                MainInfoViews.photoView.layer.borderWidth = MainInfoConstants.photoViewBorderWidth
+                MainInfoViews.photoView.layer.cornerRadius = MainInfoConstants.photoViewCornerRadius
             }
         }
     }
@@ -253,17 +254,17 @@ private extension MainInfoViewController {
     // MARK: - Set Tap Gesture Recognizer To Triangle
     func setTapGestureRecognizerToTriangle() {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleTriangleTap(_:)))
-        triangleView.addGestureRecognizer(tapGR)
+        MainInfoViews.triangleView.addGestureRecognizer(tapGR)
     }
 
     @objc func handleTriangleTap(_ gesture: UITapGestureRecognizer) {
-        UIView.animate(withDuration: animationDiration) {
-            self.triangleView.alpha = self.triangleAlphaWhenTapped
+        UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+            MainInfoViews.triangleView.alpha = MainInfoConstants.triangleAlphaWhenTapped
            
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + triangleTapAnimationDelay) {
-            UIView.animate(withDuration: self.animationDiration) {
-                self.triangleView.alpha = self.triangleAlpha
+        DispatchQueue.main.asyncAfter(deadline: .now() + MainInfoConstants.triangleTapAnimationDelay) {
+            UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+                MainInfoViews.triangleView.alpha = MainInfoConstants.triangleAlpha
             }
         }
     }
@@ -271,16 +272,16 @@ private extension MainInfoViewController {
     // MARK: - Set Tap Gesture Recognizer To Circle
     func setTapGestureRecognizerToCircle() {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleCircleTap(_:)))
-        circleView.addGestureRecognizer(tapGR)
+        MainInfoViews.circleView.addGestureRecognizer(tapGR)
     }
 
     @objc func handleCircleTap(_ gesture: UITapGestureRecognizer) {
-        UIView.animate(withDuration: animationDiration) {
-            self.circleView.transform = CGAffineTransform(scaleX: self.circleViewScaleWhenTapped, y: self.circleViewScaleWhenTapped)
+        UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+            MainInfoViews.circleView.transform = CGAffineTransform(scaleX: MainInfoConstants.circleViewScaleWhenTapped, y: MainInfoConstants.circleViewScaleWhenTapped)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + circleViewTapAnimationDelay) {
-            UIView.animate(withDuration: self.animationDiration) {
-                self.circleView.transform = .identity
+        DispatchQueue.main.asyncAfter(deadline: .now() + MainInfoConstants.circleViewTapAnimationDelay) {
+            UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+                MainInfoViews.circleView.transform = .identity
             }
         }
     }
@@ -288,16 +289,16 @@ private extension MainInfoViewController {
     // MARK: - Set Tap Gesture Recognizer To Square
     func setTapGestureRecognizerToSquare() {
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(handleSquareTap(_:)))
-        squareView.addGestureRecognizer(tapGR)
+        MainInfoViews.squareView.addGestureRecognizer(tapGR)
     }
 
     @objc func handleSquareTap(_ gesture: UITapGestureRecognizer) {
-        UIView.animate(withDuration: animationDiration) {
-            self.squareView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / self.squareViewRotationAngleDivider)
+        UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+            MainInfoViews.squareView.transform = CGAffineTransform(rotationAngle: CGFloat.pi / MainInfoConstants.squareViewRotationAngleDivider)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + squareViewTapAnimationDelay) {
-            UIView.animate(withDuration: self.animationDiration) {
-                self.squareView.transform = .identity
+        DispatchQueue.main.asyncAfter(deadline: .now() + MainInfoConstants.squareViewTapAnimationDelay) {
+            UIView.animate(withDuration: MainInfoConstants.animationDiration) {
+                MainInfoViews.squareView.transform = .identity
             }
         }
     }

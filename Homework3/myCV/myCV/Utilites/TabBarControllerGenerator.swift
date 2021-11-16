@@ -8,8 +8,6 @@
 import UIKit
 
 final class TabBarControllerGenerator {
-    static let instance = TabBarControllerGenerator()
-    
     func createTabBarController() -> UITabBarController {
         let tabBar = UITabBarController()
         let mainInfoVC = MainInfoViewController()
@@ -23,8 +21,6 @@ final class TabBarControllerGenerator {
         
         return tabBar
     }
-    
-  
 }
 
 private extension TabBarControllerGenerator {

@@ -14,7 +14,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let scene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: scene)
-            let tabBarController = TabBarControllerGenerator.instance.createTabBarController()
+            let tabBarControllerGenerator = TabBarControllerGenerator()
+            let tabBarController = tabBarControllerGenerator.createTabBarController()
             window.rootViewController = tabBarController
             self.window = window
             self.window?.makeKeyAndVisible()
