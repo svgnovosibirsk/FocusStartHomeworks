@@ -15,10 +15,9 @@ struct SuperHero {
 }
 
 extension SuperHero {
-    
+
     static func createSuperHeroArray() -> [SuperHero] {
-        var heroArray: [SuperHero] = []
-        
+
         let hero0 = SuperHero(name: "ANT MAN",
                               image: "000",
                               description: """
@@ -140,17 +139,7 @@ evolve in ways he could have never foreseen.
 Possessing vast magical knowledge and skills to call upon,
 he now serves as Earth’s newest Master of the Mystic Arts.
 """)
-        heroArray.append(hero0)
-        heroArray.append(hero1)
-        heroArray.append(hero2)
-        heroArray.append(hero3)
-        heroArray.append(hero4)
-        heroArray.append(hero5)
-        heroArray.append(hero6)
-        heroArray.append(hero7)
-        heroArray.append(hero8)
-        heroArray.append(hero9)
-        
-        return heroArray
+
+        return [hero0, hero1, hero2,hero3, hero4, hero5, hero6, hero7, hero8, hero9]
     }
 }

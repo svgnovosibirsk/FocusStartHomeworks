@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryViewController: UIViewController {
+final class HistoryViewController: UIViewController {
     
     private enum HistoryConstants {
         static let historyContainerHeightAnchorMmultiplier: CGFloat = 0.8
@@ -24,9 +24,9 @@ class HistoryViewController: UIViewController {
     var hero: SuperHero?
     
     // MARK: - Views
-    let historyTextView = UITextView()
-    let backButton = UIButton()
-    let historyContainer = UIView()
+    private let historyTextView = UITextView()
+    private let backButton = UIButton()
+    private let historyContainer = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +37,14 @@ class HistoryViewController: UIViewController {
 
 private extension HistoryViewController {
     
-    func setupHistoryViewController() {
+    private func setupHistoryViewController() {
         setupHistoryContainer()
         setupHistoryTextView()
         setupBackButton()
     }
     
     // MARK: - imageContainer
-    func setupHistoryContainer() {
+    private func setupHistoryContainer() {
         historyContainer.translatesAutoresizingMaskIntoConstraints = false
         historyContainer.backgroundColor = .white
         view.addSubview(historyContainer)
@@ -59,7 +59,7 @@ private extension HistoryViewController {
     }
     
     // MARK: - historyTextView
-    func setupHistoryTextView() {
+    private func setupHistoryTextView() {
         historyTextView.translatesAutoresizingMaskIntoConstraints = false
         historyTextView.font = UIFont.systemFont(ofSize: HistoryConstants.historyTextViewFontSize)
         historyTextView.textColor = .black
@@ -77,7 +77,7 @@ private extension HistoryViewController {
         ])
     }
     
-    func setupBackButton() {
+    private func setupBackButton() {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.setTitle("BACK", for: .normal)
         backButton.backgroundColor = .red
@@ -92,7 +92,7 @@ private extension HistoryViewController {
         ])
     }
     
-    @objc func backToDescriptionVC() {
+    @objc private func backToDescriptionVC() {
         dismiss(animated: true, completion: nil)
     }
 }

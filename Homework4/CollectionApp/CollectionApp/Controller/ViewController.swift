@@ -8,9 +8,9 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    
+
     private var heroArray: [SuperHero] = SuperHero.createSuperHeroArray()
-    
+
     private lazy var collectionView: UICollectionView = {
         let flowLayout = FlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
         collectionView.dataSource = self
         return collectionView
     }()
-    
+
     override func loadView() {
         self.view = self.collectionView
     }
@@ -46,12 +46,12 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return heroArray.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as! MyCollectionViewCell
         let hero = heroArray[indexPath.item]
         cell.configure(with: hero)
-        
+
         return cell
     }
 }

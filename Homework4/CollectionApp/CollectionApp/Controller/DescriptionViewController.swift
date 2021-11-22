@@ -8,30 +8,30 @@
 import UIKit
 
 final class DescriptionViewController: UIViewController {
-    
+
     private enum DescriptionConstants {
         static let imageContainerHeightAnchorMultiplier: CGFloat = 0.5
         static let imageViewTopAnchorConstant: CGFloat = 10
         static let imageViewWidthAnchorMultiplier: CGFloat = 0.3
-        
+
         static let descriptionTextViewFontSize: CGFloat = 18
         static let descriptionTextViewTopAnchorConstant: CGFloat = 15
         static let descriptionTextViewLeadingAnchorConstant: CGFloat = 30
         static let descriptionTextViewTrailingAnchorConstant: CGFloat = -30
         static let descriptionTextViewHeightAnchorMultiplier: CGFloat = 0.3
-        
+
         static let historyButtonBottomAnchorConstant: CGFloat = -10
         static let historyButtonLeadingAnchorConstant: CGFloat = 30
         static let historyButtonTrailingAnchorConstant: CGFloat = -30
     }
-    
+
     var hero: SuperHero?
-    
-    let imageView = UIImageView()
-    let descriptionTextView = UITextView()
-    let historyButton = UIButton()
-    let imageContainer = UIView()
-    
+
+    private let imageView = UIImageView()
+    private let descriptionTextView = UITextView()
+    private let historyButton = UIButton()
+    private let imageContainer = UIView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,7 +62,7 @@ final class DescriptionViewController: UIViewController {
             imageContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: DescriptionConstants.imageContainerHeightAnchorMultiplier)
         ])
     }
-    
+
     // MARK: - setupImageView
     private func setupImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +73,7 @@ final class DescriptionViewController: UIViewController {
         if let hero = hero {
             imageView.image = UIImage(named: hero.image)
         }
-        
+
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: DescriptionConstants.imageViewTopAnchorConstant),
             imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
@@ -81,7 +81,7 @@ final class DescriptionViewController: UIViewController {
             imageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.imageViewWidthAnchorMultiplier)
         ])
     }
-    
+
     // MARK: - setupDescriptionTextView
     private func setupDescriptionTextView() {
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,7 +91,7 @@ final class DescriptionViewController: UIViewController {
         descriptionTextView.isEditable = false
         descriptionTextView.isSelectable = false
         view.addSubview(descriptionTextView)
-        
+
         NSLayoutConstraint.activate([
             descriptionTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: DescriptionConstants.descriptionTextViewTopAnchorConstant),
             descriptionTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.descriptionTextViewLeadingAnchorConstant),
@@ -99,7 +99,7 @@ final class DescriptionViewController: UIViewController {
             descriptionTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.descriptionTextViewHeightAnchorMultiplier)
         ])
     }
-    
+
     // MARK: - setupHistoryButton
     private func setupHistoryButton() {
         historyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -108,19 +108,18 @@ final class DescriptionViewController: UIViewController {
         historyButton.setTitleColor(.white, for: .normal)
         historyButton.addTarget(self, action: #selector(showHistoryVC), for: .touchUpInside)
         view.addSubview(historyButton)
-        
+
         NSLayoutConstraint.activate([
             historyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: DescriptionConstants.historyButtonBottomAnchorConstant),
             historyButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.historyButtonLeadingAnchorConstant),
             historyButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: DescriptionConstants.historyButtonTrailingAnchorConstant)
         ])
     }
-    
-    @objc func showHistoryVC() {
+
+    @objc private func showHistoryVC() {
         let historyVC = HistoryViewController()
         historyVC.hero = self.hero
         present(historyVC, animated: true)
     }
-
 }
 
