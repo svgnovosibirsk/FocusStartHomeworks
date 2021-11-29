@@ -29,16 +29,32 @@ final class MyCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupCellViews() {
-        setupImageView()
-        setupNameLabel()
-    }
-
     func configure(with hero: SuperHero) {
         self.imageView.image = UIImage(named: hero.image)
         self.nameLabel.text = hero.name
     }
+}
 
+//MARK: - Private Methods
+
+private extension MyCollectionViewCell {
+    private func setupCellViews() {
+        setupImageView()
+        setupNameLabel()
+    }
+    
+    private func setupNameLabel() {
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textColor = UIColor.black
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        addSubview(nameLabel)
+
+        NSLayoutConstraint.activate([
+            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3),
+            nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
+        ])
+    }
+    
     private func setupImageView() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = UIColor.white
@@ -51,18 +67,6 @@ final class MyCollectionViewCell: UICollectionViewCell {
             imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: self.bounds.size.width * 0.75),
             imageView.heightAnchor.constraint(equalToConstant: self.bounds.size.width * 0.75)
-        ])
-    }
-
-    private func setupNameLabel() {
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.textColor = UIColor.black
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 15)
-        addSubview(nameLabel)
-
-        NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3),
-            nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
     }
 }
