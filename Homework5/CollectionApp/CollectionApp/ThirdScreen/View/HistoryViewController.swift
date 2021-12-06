@@ -31,9 +31,9 @@ final class HistoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupHistoryViewController()
-        
-        setTextViewText()
+
+        self.setupHistoryViewController()
+        self.setTextViewText()
     }
 }
 
@@ -48,60 +48,60 @@ private extension HistoryViewController {
     }
 
     private func setupHistoryViewController() {
-        setupHistoryContainer()
-        setupHistoryTextView()
-        setupBackButton()
+        self.setupHistoryContainer()
+        self.setupHistoryTextView()
+        self.setupBackButton()
     }
 
     // MARK: - imageContainer
     
     private func setupHistoryContainer() {
-        historyContainer.translatesAutoresizingMaskIntoConstraints = false
-        historyContainer.backgroundColor = .white
-        view.addSubview(historyContainer)
-        historyContainer.addSubview(historyTextView)
+        self.historyContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.historyContainer.backgroundColor = .white
+        view.addSubview(self.historyContainer)
+        self.historyContainer.addSubview(self.historyTextView)
 
         NSLayoutConstraint.activate([
-            historyContainer.topAnchor.constraint(equalTo: view.topAnchor),
-            historyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            historyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            historyContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: HistoryConstants.historyContainerHeightAnchorMmultiplier)
+            self.historyContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            self.historyContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.historyContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            self.historyContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: HistoryConstants.historyContainerHeightAnchorMmultiplier)
         ])
     }
 
     // MARK: - historyTextView
     
     private func setupHistoryTextView() {
-        historyTextView.translatesAutoresizingMaskIntoConstraints = false
-        historyTextView.font = UIFont.systemFont(ofSize: HistoryConstants.historyTextViewFontSize)
-        historyTextView.textColor = .black
-        historyTextView.backgroundColor = .white
-        historyTextView.isEditable = false
-        historyTextView.isSelectable = false
-        view.addSubview(historyTextView)
+        self.historyTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.historyTextView.font = UIFont.systemFont(ofSize: HistoryConstants.historyTextViewFontSize)
+        self.historyTextView.textColor = .black
+        self.historyTextView.backgroundColor = .white
+        self.historyTextView.isEditable = false
+        self.historyTextView.isSelectable = false
+        view.addSubview(self.historyTextView)
         
         NSLayoutConstraint.activate([
-            historyTextView.topAnchor.constraint(equalTo: historyContainer.topAnchor, constant: HistoryConstants.historyTextViewTopAnchorConstant),
-            historyTextView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * HistoryConstants.historyTextViewWidthAnchorMultiplyer),
-            historyTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            historyTextView.centerYAnchor.constraint(equalTo: historyContainer.centerYAnchor)
+            self.historyTextView.topAnchor.constraint(equalTo: historyContainer.topAnchor, constant: HistoryConstants.historyTextViewTopAnchorConstant),
+            self.historyTextView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * HistoryConstants.historyTextViewWidthAnchorMultiplyer),
+            self.historyTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            self.historyTextView.centerYAnchor.constraint(equalTo: self.historyContainer.centerYAnchor)
         ])
     }
     
     // MARK: - backButton
 
     private func setupBackButton() {
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        backButton.setTitle("BACK", for: .normal)
-        backButton.backgroundColor = .red
-        backButton.setTitleColor(.white, for: .normal)
-        backButton.addTarget(self, action: #selector(backToDescriptionVC), for: .touchUpInside)
-        view.addSubview(backButton)
+        self.backButton.translatesAutoresizingMaskIntoConstraints = false
+        self.backButton.setTitle("BACK", for: .normal)
+        self.backButton.backgroundColor = .red
+        self.backButton.setTitleColor(.white, for: .normal)
+        self.backButton.addTarget(self, action: #selector(backToDescriptionVC), for: .touchUpInside)
+        view.addSubview(self.backButton)
         
         NSLayoutConstraint.activate([
-            backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: HistoryConstants.backButtonBottomAnchorConstant),
-            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: HistoryConstants.backButtonLeadingAnchorConstant),
-            backButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: HistoryConstants.backButtonTrailingAnchorConstant)
+            self.backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: HistoryConstants.backButtonBottomAnchorConstant),
+            self.backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: HistoryConstants.backButtonLeadingAnchorConstant),
+            self.backButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: HistoryConstants.backButtonTrailingAnchorConstant)
         ])
     }
     

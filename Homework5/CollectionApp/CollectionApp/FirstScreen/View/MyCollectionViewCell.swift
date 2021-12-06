@@ -10,8 +10,6 @@ import UIKit
 final class MyCollectionViewCell: UICollectionViewCell {
     static let identifier = "MyCollectonViewCell"
 
-    var hero: SuperHero?
-
     private let imageView = UIImageView()
     private let nameLabel = UILabel()
 
@@ -39,8 +37,8 @@ final class MyCollectionViewCell: UICollectionViewCell {
 
 private extension MyCollectionViewCell {
     private func setupCellViews() {
-        setupImageView()
-        setupNameLabel()
+        self.setupImageView()
+        self.setupNameLabel()
     }
     
     private func setupNameLabel() {

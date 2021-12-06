@@ -16,7 +16,7 @@ final class DescriptionViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.secondScreenPresenter.loadView(controller: self, view: self.secondScreenView)
-        secondScreenView.setUpSecondScreenView()
+        self.secondScreenView.setUpSecondScreenView()
         self.view = secondScreenView
     }
     
@@ -24,8 +24,9 @@ final class DescriptionViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.topItem?.title = " "
         navigationController?.navigationBar.tintColor = UIColor.red
-        
-        setHeroImageAndDescription()
+
+        self.setHeroImage()
+        self.setHeroDescription()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,10 +43,16 @@ final class DescriptionViewController: UIViewController {
 // MARK: - Private Methods
 
 private extension DescriptionViewController {
-    private func setHeroImageAndDescription() {
+    private func setHeroImage() {
         if let number = heroNumber {
             let hero = HeroModel.getHero(by: number)
             secondScreenView.setHeroImage(hero: hero)
+        }
+    }
+    
+    private func setHeroDescription() {
+        if let number = heroNumber {
+            let hero = HeroModel.getHero(by: number)
             secondScreenView.setHeroDescription(hero: hero)
         }
     }

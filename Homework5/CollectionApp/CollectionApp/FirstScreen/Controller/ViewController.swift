@@ -11,12 +11,12 @@ final class ViewController: UIViewController {
     private var firstScreenView = FirstScreenView()
 
     override func loadView() {
-        setCollectionView()
+        self.setCollectionView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "MARVEL"
+        title = HeroModel.getTitle()
     }
 }
 
@@ -24,9 +24,15 @@ final class ViewController: UIViewController {
 
 private extension ViewController {
     private func setCollectionView() {
-        self.view = firstScreenView.getCollectionView()
-        firstScreenView.setCollectionViewDelegate(delegate: self)
-        firstScreenView.setCollectionViewDataSource(dataSource: self)
+        self.view = self.firstScreenView.getCollectionView()
+        self.firstScreenView.setCollectionViewDelegate(delegate: self)
+        self.firstScreenView.setCollectionViewDataSource(dataSource: self)
+    }
+    
+    private func moveToDescriptionViewController(with indexPath: IndexPath) {
+        let descVC = DescriptionViewController()
+        descVC.heroNumber = indexPath.item
+        self.navigationController?.pushViewController(descVC, animated: true)
     }
 }
 
@@ -34,9 +40,7 @@ private extension ViewController {
 
 extension ViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let descVC = DescriptionViewController()
-        descVC.heroNumber = indexPath.item
-        self.navigationController?.pushViewController(descVC, animated: true)
+        self.moveToDescriptionViewController(with: indexPath)
     }
 }
 
@@ -44,7 +48,7 @@ extension ViewController: UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return HeroModel.createSuperHeroArray().count
+        return HeroModel.getSuperHeroArray().count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

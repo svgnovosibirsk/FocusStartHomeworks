@@ -39,18 +39,18 @@ final class SecondScreenView: UIView {
     
     func setUpSecondScreenView() {
         self.backgroundColor = .white
-        setupImageContainer()
-        setupImageView()
-        setupDescriptionTextView()
-        setupHistoryButton()
+        self.setupImageContainer()
+        self.setupImageView()
+        self.setupDescriptionTextView()
+        self.setupHistoryButton()
     }
     
     func setHeroImage(hero: SuperHero) {
-        imageView.image = UIImage(named: hero.image)
+        self.imageView.image = UIImage(named: hero.image)
     }
 
     func setHeroDescription(hero: SuperHero) {
-        descriptionTextView.text = hero.description
+        self.descriptionTextView.text = hero.description
     }
 
     @objc private func showHistoryVC() {
@@ -64,68 +64,68 @@ private extension SecondScreenView {
     // MARK: - setupHistoryButton
     
     private func setupHistoryButton() {
-        historyButton.translatesAutoresizingMaskIntoConstraints = false
-        historyButton.setTitle("HERO'S HISTORY", for: .normal)
-        historyButton.backgroundColor = .red
-        historyButton.setTitleColor(.white, for: .normal)
-        historyButton.addTarget(self, action: #selector(showHistoryVC), for: .touchUpInside)
-        self.addSubview(historyButton)
+        self.historyButton.translatesAutoresizingMaskIntoConstraints = false
+        self.historyButton.setTitle("HERO'S HISTORY", for: .normal)
+        self.historyButton.backgroundColor = .red
+        self.historyButton.setTitleColor(.white, for: .normal)
+        self.historyButton.addTarget(self, action: #selector(showHistoryVC), for: .touchUpInside)
+        self.addSubview(self.historyButton)
 
         NSLayoutConstraint.activate([
-            historyButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: DescriptionConstants.historyButtonBottomAnchorConstant),
-            historyButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.historyButtonLeadingAnchorConstant),
-            historyButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: DescriptionConstants.historyButtonTrailingAnchorConstant)
+            self.historyButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: DescriptionConstants.historyButtonBottomAnchorConstant),
+            self.historyButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.historyButtonLeadingAnchorConstant),
+            self.historyButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: DescriptionConstants.historyButtonTrailingAnchorConstant)
         ])
     }
     
     // MARK: - setupDescriptionTextView
     
     private func setupDescriptionTextView() {
-        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionTextView.font = UIFont.systemFont(ofSize: DescriptionConstants.descriptionTextViewFontSize)
-        descriptionTextView.textColor = .black
-        descriptionTextView.isEditable = false
-        descriptionTextView.isSelectable = false
-        self.addSubview(descriptionTextView)
+        self.descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.descriptionTextView.font = UIFont.systemFont(ofSize: DescriptionConstants.descriptionTextViewFontSize)
+        self.descriptionTextView.textColor = .black
+        self.descriptionTextView.isEditable = false
+        self.descriptionTextView.isSelectable = false
+        self.addSubview(self.descriptionTextView)
 
         NSLayoutConstraint.activate([
-            descriptionTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: DescriptionConstants.descriptionTextViewTopAnchorConstant),
-            descriptionTextView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.descriptionTextViewLeadingAnchorConstant),
-            descriptionTextView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: DescriptionConstants.descriptionTextViewTrailingAnchorConstant),
-            descriptionTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.descriptionTextViewHeightAnchorMultiplier)
+            self.descriptionTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: DescriptionConstants.descriptionTextViewTopAnchorConstant),
+            self.descriptionTextView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: DescriptionConstants.descriptionTextViewLeadingAnchorConstant),
+            self.descriptionTextView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: DescriptionConstants.descriptionTextViewTrailingAnchorConstant),
+            self.descriptionTextView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.descriptionTextViewHeightAnchorMultiplier)
         ])
     }
     
     // MARK: - setupImageView
     
     private func setupImageView() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = UIColor.white
-        imageView.layer.borderColor = UIColor.lightGray.cgColor
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
+        self.imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.imageView.backgroundColor = UIColor.white
+        self.imageView.layer.borderColor = UIColor.lightGray.cgColor
+        self.imageView.clipsToBounds = true
+        self.imageView.contentMode = .scaleAspectFit
 
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: imageContainer.topAnchor, constant: DescriptionConstants.imageViewTopAnchorConstant),
-            imageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.imageViewWidthAnchorMultiplier)
+            self.imageView.topAnchor.constraint(equalTo: self.imageContainer.topAnchor, constant: DescriptionConstants.imageViewTopAnchorConstant),
+            self.imageView.centerXAnchor.constraint(equalTo: self.imageContainer.centerXAnchor),
+            self.imageView.centerYAnchor.constraint(equalTo: self.imageContainer.centerYAnchor),
+            self.imageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * DescriptionConstants.imageViewWidthAnchorMultiplier)
         ])
     }
     
     // MARK: - imageContainer
     
     private func setupImageContainer() {
-        imageContainer.translatesAutoresizingMaskIntoConstraints = false
-        imageContainer.backgroundColor = .white
+        self.imageContainer.translatesAutoresizingMaskIntoConstraints = false
+        self.imageContainer.backgroundColor = .white
         self.addSubview(imageContainer)
-        imageContainer.addSubview(imageView)
+        self.imageContainer.addSubview(self.imageView)
         
         NSLayoutConstraint.activate([
-            imageContainer.topAnchor.constraint(equalTo: self.topAnchor),
-            imageContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            imageContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            imageContainer.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: DescriptionConstants.imageContainerHeightAnchorMultiplier)
+            self.imageContainer.topAnchor.constraint(equalTo: self.topAnchor),
+            self.imageContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.imageContainer.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            self.imageContainer.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: DescriptionConstants.imageContainerHeightAnchorMultiplier)
         ])
     }
 }

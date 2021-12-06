@@ -10,11 +10,11 @@ import Foundation
 class HeroModel {
     
     static func getHero(by number: Int)-> SuperHero {
-        let array = createSuperHeroArray()
+        let array = getSuperHeroArray()
         return array[number]
     }
 
-    static func createSuperHeroArray() -> [SuperHero] {
+    static func getSuperHeroArray() -> [SuperHero] {
 
         let hero0 = SuperHero(name: "ANT MAN",
                               image: "000",
@@ -139,5 +139,9 @@ he now serves as Earth’s newest Master of the Mystic Arts.
 """)
 
         return [hero0, hero1, hero2,hero3, hero4, hero5, hero6, hero7, hero8, hero9]
+    }
+    
+    static func getTitle()-> String {
+        return "MARVEL"
     }
 }
