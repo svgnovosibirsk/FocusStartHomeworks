@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../Homework6/CarPricer/CarPricer.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:PictureLoader/PictureLoader.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../HomeworkOneCars/HomeworkOneCars.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Homework2/ThreadSaveArray/ThreadSaveArray.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Homework3/myCV/myCV.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Homework4/CollectionApp/CollectionApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Homework5/CollectionApp/CollectionApp.xcodeproj">
+   </FileRef>
+</Workspace>
