@@ -33,7 +33,8 @@ extension TableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.identifier, for: indexPath) as! CarTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CarTableViewCell.identifier, for: indexPath) as? CarTableViewCell
+        guard let cell = cell else {return UITableViewCell()}
         cell.configureCell(with: carModel.getModels()[indexPath.row])
         if indexPath.row % 2 == 0 {
             let color = Constants.customDarkGreenColor
@@ -44,7 +45,7 @@ extension TableViewDataSource: UITableViewDataSource {
             cell.imageView?.backgroundColor = color
             cell.imageView?.tintColor = color
         }
-
+        
         return cell
     }
 }
