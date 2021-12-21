@@ -73,7 +73,7 @@ extension SecondView: UITableViewDelegate {
     }
 }
 
-    // MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource
 extension SecondView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.controller?.getEmploees().count ?? 0
@@ -84,9 +84,10 @@ extension SecondView: UITableViewDataSource {
         if let emploees = controller?.getEmploees() {
             guard let name = emploees[indexPath.row].name else {return UITableViewCell()}
             let age = String(emploees[indexPath.row].age)
-            let exp = String(emploees[indexPath.row].experience)
-            cell.textLabel?.text = name + " " + age
-            cell.detailTextLabel?.text =  "Exp: " + exp
+            if let exp = (emploees[indexPath.row].experience)?.stringValue {
+                cell.textLabel?.text = name + " " + age
+                cell.detailTextLabel?.text =  "Exp: " + exp
+            }
         }
         return cell
     }

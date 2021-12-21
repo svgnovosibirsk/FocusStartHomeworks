@@ -96,9 +96,8 @@ extension SecondViewController: ISecondViewController {
                 }
                 
                 if let expText = experienceTextField.text {
-                    if let exp = Int32(expText) {
-                        employee?.experience = exp
-                    }
+                    let exp = NSDecimalNumber(string: expText)
+                    employee?.experience = exp
                 }
                 
                 employee?.company = self?.selectedCompany
@@ -134,7 +133,7 @@ extension SecondViewController: ISecondViewController {
         alertController.addTextField { alertTextField in
             if isEditMode {
                 if let exp = employee?.experience {
-                    alertTextField.text = String(exp)
+                    alertTextField.text = exp.stringValue
                 }
             } else {
                 alertTextField.placeholder = "Experience"
