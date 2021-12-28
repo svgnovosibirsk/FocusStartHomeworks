@@ -26,7 +26,8 @@ extension SSTableViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SecondScreenTableViewCell.identifier, for: indexPath) as! SecondScreenTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SecondScreenTableViewCell.identifier, for: indexPath) as? SecondScreenTableViewCell
+        guard let cell = cell else {return UITableViewCell()}
         if indexPath.row == 0 {
             cell.isSelect = true
         }

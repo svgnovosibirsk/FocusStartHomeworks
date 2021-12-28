@@ -81,7 +81,7 @@ final class SecondScreenView: UIView {
     }
     
     @objc func calculateCarPrice() {
-        onCalculateBtnPressed?()
+        self.onCalculateBtnPressed?()
     }
 }
 

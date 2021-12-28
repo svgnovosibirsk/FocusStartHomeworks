@@ -38,13 +38,13 @@ final class FirstScreenPresenter {
 // MARK: - Private Methods
 
 private extension FirstScreenPresenter {
-    private func onTouched() {
+    private func toNextScreen() {
         self.router.next()
     }
     
     private func setHandlers() {
         self.delegate?.onTouchedHandler = { [weak self] in
-            self?.onTouched()
+            self?.toNextScreen()
         }
     }
 }
